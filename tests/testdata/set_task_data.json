@@ -1,0 +1,170 @@
+[
+    {
+        "case": "task: valid input",
+        "property" : "task",
+        "input":"A Test task repeat 1 time",
+        "expected": true
+    },
+    {
+        "case":"task: invalid input - longer than maximum limitation",
+        "property" : "task",
+        "input":"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
+        "expected": false
+    },
+    {
+        "case":"task: invalid input - equal to maximum length",
+        "property" : "task",
+        "input":"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
+        "expected": true
+    },
+    {
+        "case":"task: invalid input - invalid character(s)",
+        "property" : "task",
+        "input":"abc@",
+        "expected": false 
+    },
+    {
+        "case":"priority: invalid input - non-numeric string",
+        "property" : "priority",
+        "input":"abc",
+        "expected": false 
+    },
+    {
+        "case":"priority: invalid input - float",
+        "property" : "priority",
+        "input" : 2.5,
+        "expected": false 
+    },
+    {
+        "case" : "priority: invalid input - less than lower bound",
+        "property" : "priority",
+        "input" : 0,
+        "expected": false 
+    },
+    {
+        "case":"priority: invalid input - greater than upper bound",
+        "property" : "priority",
+        "input": 4,
+        "expected": false 
+    },
+    {
+        "case" : "priority: valid input - equal to lower bound",
+        "property" : "priority",
+        "input" : 1,
+        "expected": true 
+    },
+    {
+        "case":"priority: valid input - equal to upper bound",
+        "property" : "priority",
+        "input": 3,
+        "expected": true 
+    },
+    {
+        "case":"size: invalid input - non-numeric string",
+        "property" : "size",
+        "input":"abc",
+        "expected": false 
+    },
+    {
+        "case":"size: invalid input - float",
+        "property" : "size",
+        "input" : 2.5,
+        "expected": false 
+    },
+    {
+        "case" : "size: invalid input - less than lower bound",
+        "property" : "size",
+        "input" : 0,
+        "expected": false 
+    },
+    {
+        "case":"size: invalid input - greater than upper bound",
+        "property" : "size",
+        "input": 4,
+        "expected": false 
+    },
+    {
+        "case" : "size: valid input - equal to lower bound",
+        "property" : "size",
+        "input" : 1,
+        "expected": true 
+    },
+    {
+        "case":"size: valid input - equal to upper bound",
+        "property" : "size",
+        "input": 3,
+        "expected": true 
+    },
+    {
+        "case":"group: invalid input - non-numeric string",
+        "property" : "group",
+        "input":"abc",
+        "expected": false 
+    },
+    {
+        "case":"group: invalid input - float",
+        "property" : "group",
+        "input" : 2.5,
+        "expected": false 
+    },
+    {
+        "case" : "group: invalid input - less than lower bound",
+        "property" : "group",
+        "input" : 0,
+        "expected": false 
+    },
+    {
+        "case":"group: invalid input - greater than upper bound",
+        "property" : "group",
+        "input": 5,
+        "expected": false 
+    },
+    {
+        "case" : "group: valid input - equal to lower bound",
+        "property" : "group",
+        "input" : 1,
+        "expected": true 
+    },
+    {
+        "case":"group: valid input - equal to upperbound",
+        "property" : "group",
+        "input": 4,
+        "expected": true 
+    },
+    {
+        "case":"flag: no validation input - string",
+        "property" : "flag",
+        "input":"1",
+        "expected": true
+    },
+    {
+        "case":"flag: no validation input - float",
+        "property" : "flag",
+        "input" : 2.5,
+        "expected": true 
+    },
+    {
+        "case" : "flag: no validation input - less than lower bound",
+        "property" : "flag",
+        "input" : -1,
+        "expected": true 
+    },
+    {
+        "case":"flag: no validation input - greater than upper bound",
+        "property" : "flag",
+        "input": 4,
+        "expected": true 
+    },
+    {
+        "case" : "flag: no validation input - equal to lower bound",
+        "property" : "flag",
+        "input" : 0,
+        "expected": true 
+    },
+    {
+        "case":"flag: no validation input - equal to upper bound",
+        "property" : "flag",
+        "input": 3,
+        "expected": true 
+    }
+]
