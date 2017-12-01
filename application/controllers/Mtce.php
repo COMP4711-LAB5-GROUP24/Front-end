@@ -101,6 +101,7 @@ class Mtce extends Application {
             'fsize' => form_label('Size') . form_dropdown('size', $this->app->size(), $task->size),
             'fgroup' => form_label('Group') . form_dropdown('group', $this->app->group(), $task->size),
             'fstatus' => form_label('Status') . form_dropdown('status', $this->app->status(), $task->status),
+            'fdeadline' => form_label('Deadline') . form_input(['name'=>'deadline', 'value' => $task->deadline, 'type' => 'date' ]),
             'fflag' => form_label('Flag') . form_dropdown('flag', $this->app->flag(), $task->flag),
             'zsubmit'    => form_submit(null, 'Update the TODO task'),
         );

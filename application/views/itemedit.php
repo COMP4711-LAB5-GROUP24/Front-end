@@ -5,6 +5,8 @@
     {fsize}
     {fgroup}
     {fstatus}
+    {fdeadline}
+    {fflag}
     {zsubmit}
 </form>
     {error}
