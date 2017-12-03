@@ -13,7 +13,7 @@ class Tasks extends Memory_Model {
     public function __construct()
     {
         parent::__construct(null, 'id');
-        $this->load->library(['curl', 'format', 'rest']);
+        //$this->load->library(['curl', 'format', 'rest']);
         $this->load();
     }
     /**
@@ -22,6 +22,9 @@ class Tasks extends Memory_Model {
     function getCategorizedTasks()
     {
         // extract the undone tasks
+        $undone = array();
+        $converted = array();
+
         foreach ($this->all() as $task)
         {
             if ($task->status != 2)
@@ -31,7 +34,9 @@ class Tasks extends Memory_Model {
         foreach ($undone as $task)
             $task->group = $this->app->group($task->group);
         // order them by category
-        usort($undone, "orderByCategory");
+        if (sizeof($undone) > 1)
+            usort($undone, "orderByCategory");
+
         // convert the array of task objects into an array of associative objects       
         foreach ($undone as $task)
             $converted[] = (array) $task;
@@ -42,15 +47,21 @@ class Tasks extends Memory_Model {
      */
     function getPrioritizedTasks()
     {
+        $undone = array();
+        $converted = array();
+
         foreach ($this->all() as $task)
         {
             if ($task->status != 2)
                 $undone[] = $task;
         }
         // order them by priority
-        usort($undone, "orderByPriority");
+        if (sizeof($undone) > 1)
+            usort($undone, "orderByPriority");
+
         foreach ($undone as $task)
             $task->priority = $this->app->priority($task->priority);
+
         foreach ($undone as $task)
             $converted[] = (array) $task;
         return $converted;
@@ -72,7 +83,7 @@ class Tasks extends Memory_Model {
         // load our data from the REST backend
         $this->rest->initialize(array('server' => REST_SERVER));
         $this->rest->option(CURLOPT_PORT, REST_PORT);
-        $this->_data =  (array)$this->rest->get('/job');
+        $this->_data = (array)$this->rest->get('job');
 
         // rebuild the field names from the first object
         if (!empty($this->_data)) { 
@@ -95,7 +106,7 @@ class Tasks extends Memory_Model {
     {
         $this->rest->initialize(array('server' => REST_SERVER));
         $this->rest->option(CURLOPT_PORT, REST_PORT);
-        return $this->rest->get('/job/' . $key);
+        return $this->rest->get('job/' . $key);
     }
 
     // Delete a record from the DB
@@ -103,7 +114,7 @@ class Tasks extends Memory_Model {
     {
         $this->rest->initialize(array('server' => REST_SERVER));
         $this->rest->option(CURLOPT_PORT, REST_PORT);
-        $result = $this->rest->delete('/job/' . $key);
+        $result = $this->rest->delete('job/' . $key);
         var_dump($result);
         $this->load(); // because the "database" might have changed
     }
@@ -115,8 +126,7 @@ class Tasks extends Memory_Model {
         $this->rest->option(CURLOPT_PORT, REST_PORT);
         $key = $record->{$this->_keyfield};
         //var_dump($record);
-        $retrieved = $this->rest->put('/job/' . $key, (array)$record);
-        echo($retrieved);
+        $retrieved = $this->rest->put('job/' . $key, $record);
         $this->load(); // because the "database" might have changed
     }
 
@@ -128,7 +138,7 @@ class Tasks extends Memory_Model {
         //var_dump($record);
 
         $key = $record->{$this->_keyfield};
-        $retrieved = $this->rest->post('/job/' . $key, $record);
+        $retrieved = $this->rest->post('job/' . $key, $record);
         //var_dump($retrieved);
         $this->load(); // because the "database" might have changed
     }

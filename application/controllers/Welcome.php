@@ -32,6 +32,7 @@ class Welcome extends Application
 		$this->data['remaining_tasks'] = $count;
 		// process the array in reverse, until we have five
 		$count = 0;
+        $display_tasks = array();
 		foreach(array_reverse($tasks) as $task) {
 			$task->priority = $this->app->priority($task->priority);
 			$display_tasks[] = (array) $task;
